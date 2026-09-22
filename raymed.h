@@ -27,7 +27,9 @@
 *
 *   NOT A MEDICAL DEVICE. For visualisation, training, simulation and dashboards only.
 *
-*   LICENSE: zlib/libpng (same as raylib/raygui)
+*   LICENSE: zlib/libpng (same as raylib/raygui), see LICENSE
+*
+*   Copyright (c) 2026 Jon Harsem
 *
 **********************************************************************************************/
 

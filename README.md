@@ -67,3 +67,7 @@ A limit of `NAN` means "off", and a `NAN` value shows `-?-`.
 Keys: `1/2/3` switch pages, `D` triggers a desaturation event, `L` toggles light theme. Click the ECG trace to toggle the grid, a pump to pause or run it, or a vital tile to jump to its limits. Click the alarm banner to acknowledge.
 
 Not a medical device. It is intended for visualisation, simulation and training only.
+
+## License
+
+zlib/libpng, the same as raylib and raygui. See [LICENSE](LICENSE).
