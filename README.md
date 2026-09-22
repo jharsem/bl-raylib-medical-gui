@@ -61,9 +61,24 @@ A limit of `NAN` means "off", and a `NAN` value shows `-?-`.
 
 `GuiMedSetStyle(prop, value)` and `GuiMedGetStyle(prop)` work like raygui's, with colors stored via `ColorToInt`. There are two built-in themes, `GuiMedLoadStyleDark()` (bedside monitor) and `GuiMedLoadStyleLight()`. Parameter colors follow monitor conventions (`MED_COLOR_ECG`, `_SPO2`, `_BP`, `_RESP`, `_TEMP`, `_CO2`) and change with the theme. Other useful properties are `MED_WAVE_GRID` (ECG paper), `MED_FLASH_ENABLED`, and `MED_TREND_SAMPLE_SECONDS` (sets the trend chart's time axis). For crisp numbers, load a large TTF and pass it to `GuiMedSetFont()`.
 
+## Building
+
+`raymed.h` is header-only, so you copy it into your project. With CMake, you can instead link the `raymed` interface target.
+
+Build the demo with CMake on Windows, Linux or macOS:
+
+```sh
+cmake -S . -B build
+cmake --build build --config Release
+```
+
+CMake uses an installed raylib 5.5 if it finds one. Otherwise it downloads raylib 5.5 automatically, which is the easy route on Windows (Visual Studio 2019 16.8 or later, or MinGW). Add `-DRAYMED_USE_SYSTEM_RAYLIB=OFF` to always download it. On Linux you can also just run `make`.
+
+The demo looks for a bold system font (DejaVu Sans on Linux, Segoe UI or Arial on Windows, Arial on macOS). If none is found it uses raylib's default font.
+
 ## Demo
 
-`make && ./demo`. To regenerate the screenshots, run `./demo --shot <page> <file.png> [flags]`, where the flags are `d` (desaturation event), `l` (light theme) and `g` (ECG grid). It simulates a patient and has three pages: Monitor, Trends and Setup (the Setup page mixes in plain raygui controls).
+Run `./demo`, or `build\Release\demo.exe` on Windows. To regenerate the screenshots, run `./demo --shot <page> <file.png> [flags]`, where the flags are `d` (desaturation event), `l` (light theme) and `g` (ECG grid). It simulates a patient and has three pages: Monitor, Trends and Setup (the Setup page mixes in plain raygui controls).
 Keys: `1/2/3` switch pages, `D` triggers a desaturation event, `L` toggles light theme. Click the ECG trace to toggle the grid, a pump to pause or run it, or a vital tile to jump to its limits. Click the alarm banner to acknowledge.
 
 Not a medical device. It is intended for visualisation, simulation and training only.

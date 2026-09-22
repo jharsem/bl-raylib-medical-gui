@@ -100,7 +100,16 @@ int main(int argc, char **argv)
     SetTargetFPS(60);
     SetRandomSeed(7);
 
-    Font font = LoadFontEx("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 96, NULL, 0);
+    // Bold sans for crisp numerics; the first one found wins, else raylib's default font
+    static const char *fontPaths[] = {
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "C:/Windows/Fonts/segoeuib.ttf",
+        "C:/Windows/Fonts/arialbd.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+    };
+    Font font = { 0 };
+    for (int i = 0; i < (int)(sizeof(fontPaths)/sizeof(fontPaths[0])) && font.texture.id == 0; i++)
+        if (FileExists(fontPaths[i])) font = LoadFontEx(fontPaths[i], 96, NULL, 0);
     if (font.texture.id > 0)
     {
         GenTextureMipmaps(&font.texture);
@@ -339,7 +348,7 @@ int main(int argc, char **argv)
         if (shotFile && frame == 60*(strchr(shotFlags, 'd')? 14 : 8)) { TakeScreenshot(shotFile); break; }
     }
 
-    UnloadFont(font);
+    if (font.texture.id > 0) UnloadFont(font);
     CloseWindow();
     return 0;
 }

@@ -671,28 +671,28 @@ int GuiBloodPressure(Rectangle bounds, const char *label, float systolic, float 
     const char *lim = TextFormat("Sys %s-%s", MedFormatLimit(sysLowLimit), MedFormatLimit(sysHighLimit));
     MedTextAligned(lim, (Rectangle){ bounds.x, bounds.y + 8, bounds.width - 10, ls }, ls, 2, 0, dim);
 
-    char main[32];
+    char reading[32];
     char mean[16];
     if (valid)
     {
-        snprintf(main, sizeof(main), "%.0f/%.0f", systolic, diastolic);
+        snprintf(reading, sizeof(reading), "%.0f/%.0f", systolic, diastolic);
         snprintf(mean, sizeof(mean), "(%.0f)", (systolic + 2.0f*diastolic)/3.0f);
     }
     else
     {
-        snprintf(main, sizeof(main), "-?-/-?-");
+        snprintf(reading, sizeof(reading), "-?-/-?-");
         snprintf(mean, sizeof(mean), "(-?-)");
     }
 
     Rectangle area = { bounds.x + 10, bounds.y + ts + 12, bounds.width - 20, bounds.height - ts - 18 };
     float meanSize = area.height*0.42f;
     float meanW = MedMeasure(mean, meanSize).x;
-    float size = MedFitSize(main, area.width - meanW - 12, area.height);
+    float size = MedFitSize(reading, area.width - meanW - 12, area.height);
     meanSize = fminf(meanSize, size*0.6f);
     meanW = MedMeasure(mean, meanSize).x;
 
     MedTextAligned(mean, area, meanSize, 2, 2, fg);
-    MedTextAligned(main, (Rectangle){ area.x, area.y, area.width - meanW - 10, area.height }, size, 2, 2, valid? fg : dim);
+    MedTextAligned(reading, (Rectangle){ area.x, area.y, area.width - meanW - 10, area.height }, size, 2, 2, valid? fg : dim);
 
     return MedClicked(bounds)? 1 : 0;
 }
