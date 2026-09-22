@@ -9,6 +9,26 @@ Medical-themed immediate-mode widgets for raylib, built the same way as raygui: 
 
 It works on its own or alongside raygui. If `raygui.h` is included first, raymed respects `GuiLock()`/`GuiDisable()` and uses `GuiGetFont()`.
 
+## Screenshots
+
+**Monitor.** Sweep waveforms, vital-sign tiles, NIBP, EtCO2 gauge and infusion pumps.
+![Monitor page](screenshots/monitor.png)
+
+**Alarm state.** A high-priority desaturation alarm, an out-of-limits SpO2 tile, and the ECG paper grid switched on.
+![Alarm state](screenshots/alarm.png)
+
+**Trends.** Alarm-limit bands, a probe-off gap in the SpO2 data, and NIBP bars.
+![Trends page](screenshots/trends.png)
+
+**Setup.** Dual-thumb alarm limit editors and the pain scale, next to plain raygui controls in the same theme.
+![Setup page](screenshots/setup.png)
+
+**Light theme.**
+
+| Monitor | Trends |
+|---|---|
+| ![Monitor, light theme](screenshots/monitor-light.png) | ![Trends, light theme](screenshots/trends-light.png) |
+
 ## Controls
 
 | Call | Returns |
@@ -43,7 +63,7 @@ A limit of `NAN` means "off", and a `NAN` value shows `-?-`.
 
 ## Demo
 
-`make && ./demo`. It simulates a patient and has three pages: Monitor, Trends and Setup (the Setup page mixes in plain raygui controls).
+`make && ./demo`. To regenerate the screenshots, run `./demo --shot <page> <file.png> [flags]`, where the flags are `d` (desaturation event), `l` (light theme) and `g` (ECG grid). It simulates a patient and has three pages: Monitor, Trends and Setup (the Setup page mixes in plain raygui controls).
 Keys: `1/2/3` switch pages, `D` triggers a desaturation event, `L` toggles light theme. Click the ECG trace to toggle the grid, a pump to pause or run it, or a vital tile to jump to its limits. Click the alarm banner to acknowledge.
 
 Not a medical device. It is intended for visualisation, simulation and training only.

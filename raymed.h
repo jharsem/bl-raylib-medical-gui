@@ -1006,7 +1006,7 @@ int GuiPainScale(Rectangle bounds, int *value)
     float numH = fminf(cellW*0.9f, ts*2.2f);
     float wordH = ts;
     float faceSpace = inner.height - numH - wordH - 12;
-    float faceR = fminf(cellW*0.9f, faceSpace*0.5f);
+    float faceR = fminf(fminf(cellW*0.95f, faceSpace*0.5f), inner.width/12.0f);
     bool drawFaces = faceR >= 8;
 
     Color green = { 46, 190, 110, 255 }, yellow = { 240, 190, 20, 255 }, red = { 225, 60, 50, 255 };
@@ -1030,7 +1030,7 @@ int GuiPainScale(Rectangle bounds, int *value)
         // Face above every even value: mouth curvature goes from smile to frown
         if (drawFaces && (i % 2 == 0))
         {
-            Vector2 fc = { cell.x + cell.width/2, inner.y + faceR };
+            Vector2 fc = { MedClamp(cell.x + cell.width/2, inner.x + faceR, inner.x + inner.width - faceR), inner.y + faceR };
             Color fcol = selected? c : Fade(c, 0.75f);
             DrawCircleV(fc, faceR, fcol);
             Color ink = { 30, 30, 30, 255 };

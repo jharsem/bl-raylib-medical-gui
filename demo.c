@@ -312,7 +312,7 @@ int main(int argc, char **argv)
             // Plain raygui controls, sharing the same theme
             Rectangle box = { rx, content.y + 170 + gap + 10, rw, 300 };
             GuiGroupBox(box, "Simulation (raygui)");
-            float sx = box.x + 110, sw = box.width - 190, sy = box.y + 20;
+            float sx = box.x + 130, sw = box.width - 200, sy = box.y + 20;
             GuiSlider((Rectangle){ sx, sy, sw, 24 }, "HR target", TextFormat("%.0f", pt.hrTarget), &pt.hrTarget, 30, 180); sy += 36;
             GuiSlider((Rectangle){ sx, sy, sw, 24 }, "SpO2 target", TextFormat("%.0f", pt.spo2Target), &pt.spo2Target, 70, 100); sy += 36;
             GuiSlider((Rectangle){ sx, sy, sw, 24 }, "RR target", TextFormat("%.0f", pt.rrTarget), &pt.rrTarget, 4, 40); sy += 44;
